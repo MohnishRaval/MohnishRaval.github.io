@@ -1,0 +1,33 @@
+[
+  {
+    "projects": [
+      {
+        "id": 1,
+        "title": "SpringBoot App with CRUD,AWS RDS,Jenkins/Kubernetes Pipeline",
+        "description": "A Spring Boot application that provides CRUD operations connected to AWS RDS and deployed via Jenkins and Kubernetes pipeline.",
+        "link": "https://github.com/MohnishRaval/springboot-crud-app",
+        "languages": "Java, SQL, YAML"
+      },
+      {
+        "id": 2,
+        "title": "CI/CD Pipeline with Angular Frontend and Spring Boot Backend",
+        "description": "A complete CI/CD pipeline setup integrating Angular frontend with Spring Boot backend.",
+        "link": "https://github.com/MohnishRaval/angular-springboot-cicd",
+        "languages": "Angular, Java, Jenkins"
+      }
+    ],
+    "skills": [
+      "Java",
+      "Spring Boot",
+      "Angular",
+      "React",
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "SQL",
+      "Git",
+      "Jenkins",
+      "Kubernetes"
+    ]
+  }
+]

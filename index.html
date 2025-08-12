@@ -1,440 +1,455 @@
 <!DOCTYPE html>
-<html lang="en">
-<!-- <meta http-equiv='cache-control' content='no-cache'>
-<meta http-equiv='expires' content='0'>
-<meta http-equiv='pragma' content='no-cache'> -->
+<html class="no-js">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Mohnish Raval: Portfolio</title>
-    <!-- <link href="https://fonts.googleapis.com/css?family=Mukta:300,400,500,600,700&display=swap" rel="stylesheet"> -->
-    <link rel="stylesheet" href="assets/vendors/@fortawesome/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="live-resume.css">
+  <!-- Add Your Title -->
+  <title> Your Title Here </title>
+
+  <!-- All Meta Tags -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+
+  <!-- All Link tags -->
+  <link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
+  <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-72x72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-114x114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-144x144-precomposed.png">
+  <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Amaranth' rel='stylesheet'>
+  <link rel="stylesheet" href="css/normalize.min.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- All script tags -->
+  <script>document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
+  <script src="js/vendor/jquery.hashchange.min.js"></script>
+  <script src="js/vendor/jquery.easytabs.min.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("modal-wrapper");
+    const modalClose = document.getElementById("modal-close");
+    const modalTitle = document.getElementById("modal-title");
+    const modalDescription = document.getElementById("modal-description");
+    const modalLanguages = document.getElementById("modal-languages");
+    const modalLink = document.getElementById("modal-link");
+
+    let projectsData = [];
+
+    // Fetch the projects JSON once
+    fetch('projects.json')
+      .then(response => response.json())
+      .then(data => {
+        projectsData = data[0].projects;
+      })
+      .catch(err => console.error("Error loading projects.json:", err));
+
+    // Add click listeners to project containers
+    document.querySelectorAll('.project-container').forEach(container => {
+      container.addEventListener('click', () => {
+        const projectId = container.getAttribute('data-project-id');
+        const project = projectsData.find(p => p.id == projectId);
+        if (project) {
+          modalTitle.textContent = project.title;
+          modalDescription.textContent = project.description;
+          modalLanguages.textContent = project.languages;
+          modalLink.href = project.link;
+          modalLink.textContent = project.link;
+
+          modal.style.display = "block";
+        }
+      });
+    });
+
+    // Close modal when clicking on close button
+    modalClose.addEventListener('click', () => {
+      modal.style.display = "none";
+    });
+
+    // Close modal when clicking outside modal-content
+    window.addEventListener('click', (event) => {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    });
+  });
+</script>
+
 </head>
 
-<body>
-    <header>
-        <!-- <button class="btn btn-white btn-share ml-auto mr-3 ml-md-0 mr-md-auto"><img src="assets/images/share.svg"
-                alt="share" class="btn-img">
-            SHARE</button>
-        <nav class="collapsible-nav" id="collapsible-nav">
-            <a href="index.html" class="nav-link active">HOME</a>
-            <a href="resume.html" class="nav-link">RESUME</a>
-            <a href="portfolio.html" class="nav-link">PORTFOLIO</a>
-            <a href="blog.html" class="nav-link">BLOG</a>
-            <a href="contact.html" class="nav-link">CONTACT</a>
-        </nav>
-        <button class="btn btn-menu-toggle btn-white rounded-circle" data-toggle="collapsible-nav"
-            data-target="collapsible-nav"><img src="assets/images/hamburger.svg" alt="hamburger"></button> -->
-    </header>
-    <div class="content-wrapper">
-        <aside>
-            <div class="profile-img-wrapper">
-                <img src="assets/images/1689434676422.jpg" alt="profile">
-            </div>
-            <h1 class="profile-name">Mohnish Raval</h1>
-            <div class="text-center">
-                <span class="badge badge-white badge-pill profile-designation">Software Engineer</span>
-            </div>
-            <nav class="social-links">
-                <a href="https://www.linkedin.com/in/mohnish-raval/" target="_blank" class="social-link"><i
-                        class="fab fa-brands fa-linkedin"></i></a>
-                <a href="https://github.com/mohnishraval" target="_blank" class="social-link"><i
-                        class="fab fa-github"></i></a>
-            </nav>
-            <div class="widget">
-                <h5 class="widget-title" style="font-weight: bold;">personal information</h5>
-                <div class="widget-content">
-                    <p>BIRTHDAY : 27 July 1998</p>
-                    <!-- <p>WEBSITE : www.example.com</p> -->
-                    <p>PHONE : +1-571-279-2215</p>
-                    <p>MAIL : mraval@gmu.edu</p>
-                    <p>Location : Virginia, USA</p>
-                    <a href="assets/Mohnish-Resume-Java.pdf" download>
-                        <button class="btn btn-download-cv btn-primary rounded-pill">
-                            <img src="assets/images/download.svg" alt="download" class="btn-img">
-                            DOWNLOAD CV
-                        </button>
-                    </a>
-                </div>
-            </div>
-            <div class="widget card">
-                <div class="card-body">
-                    <div class="widget-content">
-                        <h5 class="widget-title card-title">LANGUAGES</h5>
-                        <p>English : Fluent</p>
-                        <p>Gujarati : Native</p>
-                        <p>Hindi : Fluent</p>
-                    </div>
-                </div>
-            </div>
-            <div class="widget card">
-                <div class="card-body">
-                    <div class="widget-content">
-                        <h5 class="widget-title card-title">INTERESTS</h5>
-                        <p>Video games</p>
-                        <p>Movies</p>
-                        <p>Soccer</p>
-                        <p>Hiking</p>
-                    </div>
-                </div>
-            </div>
-        </aside>
-        <main>
-            <section class="intro-section">
-                <h2 class="section-title">Hello, Mohnish Raval!</h2>
-                <p>Hi, I'm Mohnish Raval. I hold a B.Tech in Computer Science and Engineering from SRM Institute of
-                    Science and Technology, Chennai and currently pursuing my M.S in Computer Science from George Mason
-                    University, Fairfax.Enthusiastic Full Stack Developer with a passion for crafting seamless user experiences. Specializing in Angular, Spring Boot, and React, I bring over 2+ years of experience in delivering robust web applications and collaborating effectively with cross-functional teams. My expertise includes designing and developing user interfaces, conducting rigorous testing, and implementing REST APIs. With a proven track record of enhancing application frameworks, I excel in bug fixes and maintaining high code quality. A natural collaborator and leader, I thrive on new challenges and growth opportunities. Currently pursuing a Master of Science in Computer Science at George Mason University, and holding a Bachelor of Technology in Information Technology from SRM Institute of Science and Technology.</p>
-                <!-- <a href="#!" class="btn btn-primary btn-hire-me">HIRE ME</a> -->
-            </section>
-            <section class="resume-section">
-                <div class="row">
-                    <div class="col">
-                        <h6 class="section-subtitle">RESUME</h6>
-                        <h2 class="section-title">EDUCATION</h2>
-                        <ul class="time-line">
-                            <li class="time-line-item">
-                                <span class="badge badge-primary">2022 - 2024</span>
-                                <h6 class="time-line-item-title">Master In Computer Science</h6>
-                                <p class="time-line-item-subtitle">George Mason University</p>
-                                <p class="time-line-item-content">Courses:System Programming,DBMS,
-                                    Mathematical Foundations of CS,Analysis of Algorithms,Data Mining, Component based
-                                    Software Development
-                                </p>
-                            </li>
-                            <li class="time-line-item">
-                                <span class="badge badge-primary">2016 - 2020</span>
-                                <h6 class="time-line-item-title">Bachelors in Information Technology</h6>
-                                <p class="time-line-item-subtitle">Studied at SRM Institute of Science and Technology
-                                </p>
-                                <p class="time-line-item-content">Courses: OOPS,Data Structures, Computer Networks, C,
-                                    C++, Cloud Computing
-                                </p>
-                            </li>
-                            <!-- <li class="time-line-item">
-                                <span class="badge badge-primary">1993 - 1995</span>
-                                <h6 class="time-line-item-title">Studied at Oxford University</h6>
-                                <p class="time-line-item-subtitle">UNIVERSITY</p>
-                                <p class="time-line-item-content">Mauris magna sapien, pharetra consectetur fringilla
-                                    vitae, interdum sed tortor.
-                                </p>
-                            </li> -->
-                        </ul>
-                    </div>
-                    <div class="col">
-                        <h6 class="section-subtitle">RESUME</h6>
-                        <h2 class="section-title">Experience</h2>
-                        <ul class="time-line">
-                            <li class="time-line-item">
-                                <span class="badge badge-primary">2024 - Present</span>
-                                <h6 class="time-line-item-title">Volunteer Full Stack Engineer</h6>
-                                <p class="time-line-item-subtitle">Disaster Accountability Project</p>
-                                <p class="time-line-item-content">Contributed to building a Spring Boot backend with DynamoDB, enhancing disaster response data retrieval speed by 25%, and integrated Angular frontend with Java RESTful APIs using AWS Lambda for scalability. Supported end-to-end testing with Cypress, reducing regression defects by 40%, and assisted in deploying web applications using AWS S3.</p>
-                            </li>
-                            <li class="time-line-item">
-                                <span class="badge badge-primary">2021 - 2022</span>
-                                <h6 class="time-line-item-title">Full Stack Engineering Analyst</h6>
-                                <p class="time-line-item-subtitle">Accenture</p>
-                                <p class="time-line-item-content">Led a team to deliver two Angular and Spring Boot applications, achieving 95% client satisfaction, and engineered RESTful APIs handling 2000+ daily requests. Enhanced user experience consistency by 30% with responsive design and attained 98% code coverage through comprehensive testing with Jasmine, Cypress, and JUnit.</p>
-                            </li>
-                            <li class="time-line-item">
-                                <span class="badge badge-primary">2020 - 2020</span>
-                                <h6 class="time-line-item-title">Full Stack Engineer</h6>
-                                <p class="time-line-item-subtitle">MeritPlus</p>
-                                <p class="time-line-item-content">Collaborated with a team to develop a custom web-based application, reducing data entry errors by 25% 
-                                    and improving efficiency by automating tasks. Architected and deployed secure RESTful APIs and microservices using Express.js, MongoDB, and AWS ECS, while integrating third-party APIs and ensuring industry compliance.
-                                </p>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col">
-                        <h6 class="section-subtitle">RESUME</h6>
-                        <h2 class="section-title">SKILLS</h2>
-                        <div class="skills" style="font-weight: bold;">
-                            <ol>
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
-                                        role="progressbar" style="width: 90%;" aria-valuenow="25" aria-valuemin="0"
-                                        aria-valuemax="100">
-                                        Angular</div>
-                                </div>
-                            </ol>
-                            <ol>
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
-                                        role="progressbar" style="width: 70%;" aria-valuenow="25" aria-valuemin="0"
-                                        aria-valuemax="100">
-                                        Java</div>
-                                </div>
-                            </ol>
-                            <div class="spacing" style="height: 0.5rem;">
-                            </div>
-                            <ol>
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-secondary"
-                                        role="progressbar" style="width: 80%;" aria-valuenow="25" aria-valuemin="0"
-                                        aria-valuemax="100">
-                                        HTML/CSS</div>
-                                </div>
-                            </ol>
-                            <div class="spacing" style="height: 0.5rem;"></div>
-                            <ol>
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
-                                        role="progressbar" style="width: 80%;" aria-valuenow="25" aria-valuemin="0"
-                                        aria-valuemax="100">SQL
-                                    </div>
-                                </div>
-                            </ol>
-                            <div class="spacing" style="height: 0.5rem;"></div>
-                            <ol>
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
-                                        role="progressbar" style="width: 60%;" aria-valuenow="25" aria-valuemin="0"
-                                        aria-valuemax="100">AWS
-                                    </div>
-                                </div>
-                            </ol>
-                            <div class="spacing" style="height: 0.5rem;"></div>
-                            <ol>
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-info"
-                                        role="progressbar" style="width: 70%;" aria-valuenow="25" aria-valuemin="0"
-                                        aria-valuemax="100">
-                                        Python</div>
-                                </div>
-                            </ol>
-                            <div class="spacing" style="height: 0.5rem;"></div>
-                            <ol>
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-black"
-                                        role="progressbar" style="width: 80%;" aria-valuenow="25" aria-valuemin="0"
-                                        aria-valuemax="100">Git
-                                    </div>
-                                </div>
-                            </ol>
-                            <div class="spacing" style="height: 0.5rem;"></div>
-                            <ol>
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
-                                        role="progressbar" style="width: 50%;" aria-valuenow="25" aria-valuemin="0"
-                                        aria-valuemax="100">
-                                        ReactJS</div>
-                                </div>
-                            </ol>
-                            <div class="spacing" style="height: 0.5rem;"></div>
-                            <ol>
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
-                                        role="progressbar" style="width: 80%;" aria-valuenow="25" aria-valuemin="0"
-                                        aria-valuemax="100">
-                                        Typescript</div>
-                                </div>
-                            </ol>
-                            <div class="spacing" style="height: 0.5rem;"></div>
-                            <ol>
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
-                                        role="progressbar" style="width: 80%;" aria-valuenow="25" aria-valuemin="0"
-                                        aria-valuemax="100">
-                                        Javascript</div>
-                                </div>
-                            </ol>
-                            <div class="spacing" style="height: 0.5rem;"></div>
-                        </div>
-                        <!-- <ul class="time-line">
-                            <ol>1. Angular</ol>
-                            <ol>1. Angular</ol>
-                            <ol>1. Angular</ol>
-                            <ol>1. Angular</ol>
-                            <ol>1. Angular</ol>
-                            <ol>1. Angular</ol>
-                            <!-- <li class="time-line-item">
-                                <span class="badge badge-primary">2010 - 2014</span>
-                                <h6 class="time-line-item-title">UI/UX Designer</h6>
-                                <p class="time-line-item-subtitle">Web Agency</p>
-                                <p class="time-line-item-content">Mauris magna sapien, pharetra consectetur fringilla
-                                    vitae, interdum sed
-                                    tortor.</p>
-                            </li>
-                            <li class="time-line-item">
-                                <span class="badge badge-primary">2008 - 2010</span>
-                                <h6 class="time-line-item-title">Web Designer</h6>
-                                <p class="time-line-item-subtitle">Apple Inc.</p>
-                                <p class="time-line-item-content">Mauris magna sapien, pharetra consectetur fringilla
-                                    vitae, interdum sed
-                                    tortor.
-                                </p>
-                            </li>
-                            <li class="time-line-item">
-                                <span class="badge badge-primary">2006 - 2008</span>
-                                <h6 class="time-line-item-title">Graphic Designer</h6>
-                                <p class="time-line-item-subtitle">Apple Inc.</p>
-                                <p class="time-line-item-content">Mauris magna sapien, pharetra consectetur fringilla
-                                    vitae, interdum sed
-                                    tortor.
-                                </p>
-                            </li> -->
-                        </ul>
-                    </div>
-                </div>
-            </section>
-            <section class="services-section">
-                <!-- <h6 class="section-subtitle">WHAT I DO</h6> -->
-                <h2 class="section-title">PROJECTS</h2>
-                <div class="row">
-                    <div class="media service-card col">
-                        <div class="service-icon">
-                            <img src="assets/images/001-target.svg" alt="target">
-                        </div>
-                        <div class="media-body">
-                            <a href="https://covid-tracker-mohnish.web.app/" target="_blank">
-                                <h5 class="service-title">Covid-Tracker</h5>
-                            </a>
-                            <p class="service-description">• Developed a web-based Covid-Tracker application using
-                                ReactJS to display daily statistics of Coronavirus cases. </p>
-                        </div>
-                    </div>
-                    <div class="media service-card col">
-                        <div class="service-icon">
-                            <img src="assets/images/001-target.svg" alt="target">
-                        </div>
-                        <div class="media-body">
-                            <a href="https://github.com/MohnishRaval/SWE-642-HA3" target="_blank">
-                                <h5 class="service-title">Full Stack Devops with AWS and Springboot</h5>
-                            </a>
-                            <p class="service-description">• Developed Full Stack Springboot application and integrated
-                                with AWS devops and deployed it on kubernetes cluster using Rancher. </p>
-                        </div>
-                    </div>
-                    <!-- <div class="media service-card col">
-                        <div class="service-icon">
-                            <img src="assets/images/003-idea.svg" alt="bulb">
-                        </div>
-                        <div class="media-body">
-                            <h5 class="service-title">Graphic design</h5>
-                            <p class="service-description">Mauris magna sapien, pharetra consectetur fringilla vitae,
-                                interdum sed
-                                tortor.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="media service-card col-">
-                        <div class="service-icon">
-                            <img src="assets/images/002-development.svg" alt="development">
-                        </div>
-                        <div class="media-body">
-                            <h5 class="service-title">Development</h5>
-                            <p class="service-description">Mauris magna sapien, pharetra consectetur fringilla vitae,
-                                interdum sed
-                                tortor.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="media service-card col">
-                        <div class="service-icon">
-                            <img src="assets/images/004-smartphone.svg" alt="smartphone">
-                        </div>
-                        <div class="media-body">
-                            <h5 class="service-title">Mobile design</h5>
-                            <p class="service-description">Mauris magna sapien, pharetra consectetur fringilla vitae,
-                                interdum sed
-                                tortor.
-                            </p>
-                        </div>
-                    </div> -->
-                </div>
-                <!-- <div class="row">
-                    <div class="media service-card col">
-                        <div class="service-icon">
-                            <img src="assets/images/004-smartphone.svg" alt="smartphone">
-                        </div>
-                        <div class="media-body">
-                            <h5 class="service-title">Mobile design</h5>
-                            <p class="service-description">Mauris magna sapien, pharetra consectetur fringilla vitae,
-                                interdum sed
-                                tortor.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="media service-card col">
-                        <div class="service-icon">
-                            <img src="assets/images/004-smartphone.svg" alt="smartphone">
-                        </div>
-                        <div class="media-body">
-                            <h5 class="service-title">Mobile design</h5>
-                            <p class="service-description">Mauris magna sapien, pharetra consectetur fringilla vitae,
-                                interdum sed
-                                tortor.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="media service-card col">
-                        <div class="service-icon">
-                            <img src="assets/images/004-smartphone.svg" alt="smartphone">
-                        </div>
-                        <div class="media-body">
-                            <h5 class="service-title">Mobile design</h5>
-                            <p class="service-description">Mauris magna sapien, pharetra consectetur fringilla vitae,
-                                interdum sed
-                                tortor.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="media service-card col">
-                        <div class="service-icon">
-                            <img src="assets/images/004-smartphone.svg" alt="smartphone">
-                        </div>
-                        <div class="media-body">
-                            <h5 class="service-title">Mobile design</h5>
-                            <p class="service-description">Mauris magna sapien, pharetra consectetur fringilla vitae,
-                                interdum sed
-                                tortor.
-                            </p>
-                        </div>
-                    </div>
-                </div> -->
-            </section>
-            <!-- <section class="testimonial-section">
-                <div id="testimonialCarousel" class="testimonial-carousel carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <p class="testimonial-content">Mauris magna sapien, pharetra consectetur fringilla vitae,
-                                interdum sed tortor.</p>
-                            <img src="assets/images/Profile.png" alt="profile" class="testimonial-img">
-                            <p class="testimonial-name">Nout Golstein</p>
-                        </div>
-                        <div class="carousel-item">
-                            <p class="testimonial-content">Mauris magna sapien, pharetra consectetur fringilla vitae,
-                                interdum sed tortor.</p>
-                            <img src="assets/images/Profile.png" alt="profile" class="testimonial-img">
-                            <p class="testimonial-name">Nout Golstein</p>
-                        </div>
-                        <div class="carousel-item">
-                            <p class="testimonial-content">Mauris magna sapien, pharetra consectetur fringilla vitae,
-                                interdum sed tortor.</p>
-                            <img src="assets/images/Profile.png" alt="profile" class="testimonial-img">
-                            <p class="testimonial-name">Nout Golstein</p>
-                        </div>
-                    </div>
-                    <ol class="carousel-indicators">
-                        <li data-target="#testimonialCarousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#testimonialCarousel" data-slide-to="1"></li>
-                        <li data-target="#testimonialCarousel" data-slide-to="2"></li>
-                    </ol>
-                </div>
-            </section> -->
+<!-- Start of Body Tag -->
 
-            <!-- <footer>Live Resume @ <a href="https://www.bootstrapdash.com" target="_blank" rel="noopener noreferrer">BootstrapDash</a>. All Rights Reserved 2020</footer> -->
-        </main>
-    </div>
-    <script src="assets/vendors/jquery/dist/jquery.min.js"></script>
-    <script src="assets/vendors/@popperjs/core/dist/umd/popper-base.min.js"></script>
-    <script src="assets/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="assets/js/live-resume.js"></script>
+<body class="bg-fixed bg-1">
+  <div class="main-container">
+    <div class="main wrapper clearfix">
+
+      <!-- Header Start -->
+      <header id="header">
+        <div id="logo">
+          <h6>
+            Mohnish Raval
+          </h6>
+          <h4>
+             Full Stack Developer | Software Engineer
+          </h4>
+        </div>
+      </header>
+
+      <!-- Text "hello world" -->
+      <header id="header">
+        <div id="helloworld">
+          <h1>
+            Hello, World !
+          </h1>
+        </div>
+      </header>
+
+      <!-- Main Tab Container -->
+      <div id="tab-container" class="tab-container">
+
+        <!-- Tab List -->
+        <ul class='etabs'>
+
+          <li class='tab' id="tab-about">
+            <a href="#about">
+              <i class="icon-user"></i>
+              <span>
+                About Me
+              </span>
+            </a>
+          </li>
+
+          <li class='tab'>
+            <a href="#resume">
+              <i class="icon-file-text"></i>
+              <span>
+                Skills
+              </span>
+            </a>
+          </li>
+
+          <li class='tab'>
+            <a href="#portfolio">
+              <i class="icon-heart"></i>
+              <span>
+                Projects
+              </span>
+            </a>
+          </li>
+
+          <li class='tab'>
+            <a href="#contact">
+              <i class="icon-envelope"></i>
+              <span>
+                Contact
+              </span>
+            </a>
+          </li>
+
+        </ul>
+        <!-- End Tab List -->
+
+        <!-- ----------------------------------------------------------------------------------- -->
+        <!-- Code for differents Tabs strat from here. -->
+        <div id="tab-data-wrap">
+
+          <!-- About Tab Data -->
+          <div id="about">
+            <section class="clearfix">
+              <div class="g2">
+                <div class="photo">
+                  <img src="./images/photo.jpg" alt="Your alt text">
+                </div>
+                <div class="info">
+                  <h2>
+                    <p></p>
+                    Mohnish Raval
+                  </h2>
+                  <h4>
+                    Software Engineer 
+                  </h4>
+                  <p>
+                    Type your description here.
+                  </p>
+                  </p>
+                </div>
+              </div>
+
+              <div class="g1">
+                <div class="main-links sidebar">
+                  <ul>
+                    <li>
+                      <a href="#resume">
+                        View My Skills
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#portfolio">
+                        View My Projects
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#contact">
+                        Hire me for your next project
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="break">
+              </div>
+              <div class="contact-info">
+                <div class="g1">
+                  <div class="item-box clearfix">
+                    <i class="icon-envelope"></i>
+                    <div class="item-data">
+                      <h3>
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                        <a href="mailto:mohnishraval40@gmail.com">
+                          mohnishraval40@gmail.com
+                        </a>
+                      </h3>
+                      <p>
+                        Email Address
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="g1">
+                  <div class="item-box clearfix">
+                    <i class="fab fa-github"></i>
+                    <div class="item-data">
+                      <h3>
+                        <a href="https://github.com/MohnishRaval">
+                          Github
+                        </a>
+                      </h3>
+                      <p>
+                        Github Profile
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="g1">
+                  <div class="item-box clearfix">
+                    <i class="fa-solid fa-file"></i>
+                    <div class="item-data">
+                      <h3>
+                        <a href="/Mohnish_Resume_JS_FullStack-AL.pdf" download>
+                          Download Resume
+                        </a>
+                      </h3>
+                      <p>
+                        Resume
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+          <!-- End About Tab Data -->
+          <!-- ----------------------------------------------------------------------------------- -->
+          <!-- skills Tab Data -->
+          <div id="resume">
+            <section class="clearfix">
+              <div class="g2">
+                <h3>
+                  Programming Languages
+                </h3>
+                <div class="meter emerald">
+                  <span style="width: 90%">
+                    <span>
+                      Java
+                    </span>
+                  </span>
+                </div>
+                <div class="meter emerald">
+                  <span style="width: 90%">
+                    <span>
+                      Python
+                    </span>
+                  </span>
+                </div>
+                <div class="meter emerald">
+                  <span style="width: 90%">
+                    <span>
+                      Javascript
+                    </span>
+                  </span>
+                </div>
+                <div class="meter emerald">
+                  <span style="width: 90%">
+                    <span>
+                     Typescript
+                    </span>
+                  </span>
+                </div>
+                <div class="meter emerald">
+                  <span style="width: 70%">
+                    <span>
+                      Bash
+                    </span>
+                  </span>
+                </div>
+                <div class="break"></div>
+              </div>
+
+              <div class="g1">
+                <h3>
+                  Frameworks
+                </h3>
+                <div class="meter emerald">
+                  <span style="width: 70%">
+                    <span>
+                      React.JS
+                    </span>
+                  </span>
+                </div>
+                <div class="meter emerald">
+                  <span style="width: 70%">
+                    <span>
+                      Angular
+                    </span>
+                  </span>
+                </div>
+                <div class="meter emerald">
+                  <span style="width: 80%">
+                    <span>
+                      SpringBoot
+                    </span>
+                  </span>
+                </div>
+                <div class="meter emerald">
+                  <span style="width: 80%">
+                    <span>
+                      ExpressJS
+                    </span>
+                  </span>
+                </div>
+                <div class="meter emerald">
+                  <span style="width: 70%">
+                    <span>
+                      Flask
+                    </span>
+                  </span>
+                </div>
+              </div>
+
+              <div class="g2">
+                <h3>
+                  Tools/Technologies
+                </h3>
+                <span class="label label-info">Git</span>
+                <span class="label label-info">Docker</span>
+                <span class="label label-info">Kubernetes</span>
+                <span class="label label-info">Jenkins</span>
+                <span class="label label-info">AWS</span>
+                <span class="label label-info">Junit</span>
+                <span class="label label-info">Cypress</span>
+                <span class="label label-info">Jest</span>
+                <span class="label label-info">SQL</span>
+                <span class="label label-info">Redux</span>
+                <span class="label label-info">Ngrx</span>
+                <span class="label label-info">REST APIs</span>
+                <span class="label label-info">GraphQL</span>
+                
+              </div>
+            </section>
+          </div>
+
+          <!-- End skills Tab Data -->
+          <!-- ----------------------------------------------------------------------------------- -->
+          <!-- Projects Tab Data -->
+          <div id="portfolio">
+            <section class="clearfix">
+              <div class="project-section">
+               <div class="project-container" data-project-id="1">
+                  <div class="project-img-container">
+                    <img src="./images/floor.jpg" alt="project image">
+                  </div>
+                  <p class="project-title">SpringBoot App with CRUD,AWS RDS,Jenkins/Kubernetes Pipeline</p>
+                </div>
+                <div class="project-container" data-project-id="2">
+                  <div class="project-img-container">
+                    <img src="./images/floor.jpg" alt="project image">
+                  </div>
+                  <p class="project-title">CI/CD Pipeline with Angular Frontend and Spring Boot Backend</p>
+                </div>
+              </div>
+              <div id="modal-wrapper" class="modal" style="display:none;">
+            <div class="modal-content animate">
+              <span id="modal-close" class="close" title="Close PopUp">&times;</span>
+              <img src="images/floor.jpg" alt="project" class="avatar">
+              <h1 id="modal-title" style="text-align:center">Project Details</h1>
+              <p id="modal-description"></p>
+              <p><strong>Languages used:</strong> <span id="modal-languages"></span></p>
+              <p><a id="modal-link" href="#" target="_blank">Project Link</a></p>
+            </div>
+          </div>
+              <div class="break"></div>
+            </section>
+          </div>
+          <!-- End Projects tab -->
+          <!-- ----------------------------------------------------------------------------------- -->
+          <!-- Contact Tab Data -->
+          <div id="contact">
+            <section class="clearfix">
+              <div class="g1">
+                <div class="sny-icon-box">
+                  <div class="sny-icon">
+                    <i class="icon-globe"></i>
+                  </div>
+                  <div class="sny-icon-content">
+                    <h4>
+                      Address
+                    </h4>
+                    <p>
+                      United States
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="g1">
+                <div class="sny-icon-box">
+                  <div class="sny-icon">
+                    <i class="icon-phone"></i>
+                  </div>
+                  <div class="sny-icon-content">
+                    <h4>
+                      E-mail
+                    </h4>
+                    <p>
+                      mohnishraval40@gmail.com
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="g1">
+                <div class="sny-icon-box">
+                  <div class="sny-icon">
+                    <i class="icon-user"></i>
+                  </div>
+                  <div class="sny-icon-content">
+                    <h4>
+                      About Me
+                    </h4>
+                    <p style="text-align: center;">
+                      Enthusiastic Full Stack Developer with a passion for crafting seamless user experiences. Specializing in Angular, Spring Boot, and React, I bring experience in delivering robust web applications and collaborating effectively with cross-functional teams. My expertise includes designing and developing user interfaces, conducting rigorous testing, and implementing REST APIs. With a proven track record of enhancing application frameworks, I excel in bug fixes and maintaining high code quality. A natural collaborator and leader, I thrive on new challenges and growth opportunities. Currently pursuing a Master of Science in Computer Science at George Mason University, and holding a Bachelor of Technology in Information Technology from SRM Institute of Science and Technology.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="break"></div>
+            </section>
+          </div>
+          <!-- End Contact Data -->
+          <!-- ----------------------------------------------------------------------------------- -->
+        </div>
+      </div>
 </body>
 
 </html>
